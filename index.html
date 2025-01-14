@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Dias Juntos</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            font-size: 1.8em;
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        #contador {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b81;
+            transform: rotate(45deg);
+            animation: floatUp 5s linear infinite;
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b81;
+            border-radius: 50%;
+        }
+        
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Foto de vocês -->
+    <img src="foto.jpg" alt="Nós dois">
+
+    <h1>❤️ Nosso Amor ❤️</h1>
+    <p>Estamos juntos há:</p>
+    <p id="contador">...</p>
+
+    <script>
+        // Data de início do relacionamento
+        const dataInicio = new Date("2024-01-20"); // Altere para sua data
+
+        function atualizarContador() {
+            const hoje = new Date();
+            const diffTempo = hoje - dataInicio;
+            const diasJuntos = Math.floor(diffTempo / (1000 * 60 * 60 * 24));
+            document.getElementById("contador").innerText = `${diasJuntos} dias`;
+        }
+
+        function criarCoracao() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Atualiza o contador e cria corações
+        atualizarContador();
+        setInterval(criarCoracao, 300);
+    </script>
+</body>
+
+</html>
